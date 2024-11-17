@@ -8,6 +8,19 @@
   z-index: 100000;
   margin-right: auto;
   margin-left: auto;
+
+  &--small {
+    @include l-pc-all {
+      width: calc(33.33% - 30px); // Accounting for padding
+      margin-bottom: 60px;
+      padding-right: 15px;
+      padding-left: 15px;
+      // Force items to stay in the same row
+      &:nth-child(n+3) {
+        margin-right: 0;
+      }
+    }
+  }
   @include l-pc-all {
     padding-top: 100px;
     padding-bottom: 50px;
@@ -29,24 +42,53 @@
   &__item {
     box-sizing: border-box;
     overflow: hidden;
-    @include l-pc-all {
-      width: 33.3%;
-      margin-bottom: 60px;
-      padding-right: 15px;
-      padding-left: 15px;
+
+    // New layout modifications
+    &--large {
+      @include l-pc-all {
+        width: 100%;
+        margin-bottom: 40px;
+        padding-right: 15px;
+        padding-left: 15px;
+        .p-sketch-index__item-thumb {
+          padding-top: 40%; // Taller aspect ratio for large cards
+        }
+      }
+      @include l-tablet {
+        width: 100%;
+        margin-bottom: 40px;
+        padding-right: 10px;
+        padding-left: 10px;
+      }
+      @include l-mobile {
+        width: 100%;
+        margin-bottom: 30px;
+        padding-right: 10px;
+        padding-left: 10px;
+      }
     }
-    @include l-tablet {
-      width: 50%;
-      margin-bottom: 40px;
-      padding-right: 10px;
-      padding-left: 10px;
+
+    &--small {
+      @include l-pc-all {
+        width: 33.3%;
+        margin-bottom: 60px;
+        padding-right: 15px;
+        padding-left: 15px;
+      }
+      @include l-tablet {
+        width: 50%;
+        margin-bottom: 40px;
+        padding-right: 10px;
+        padding-left: 10px;
+      }
+      @include l-mobile {
+        width: 100%;
+        margin-bottom: 30px;
+        padding-right: 10px;
+        padding-left: 10px;
+      }
     }
-    @include l-mobile {
-      width: 100%;
-      margin-bottom: 30px;
-      padding-right: 10px;
-      padding-left: 10px;
-    }
+
     &-wrap {
       display: block;
     }
@@ -65,9 +107,15 @@
       }
       &:before {
         background-color: #fff;
+        display: none;
       }
       &:after {
         background-color: rgba(0, 0, 0, 0.7);
+        display: none;
+      }
+
+      &:before, &:after {
+        display: none; // Remove the overlay elements
       }
       &-label {
         width: 100%;
@@ -110,9 +158,8 @@
       @include fontSize(12);
     }
   }
-  //
-  // Interaction
-  //
+
+  // Keeping your existing interaction styles
   &__item {
     &-thumb {
       transform: scaleY(0);
@@ -169,14 +216,10 @@
     &:hover & {
       &-thumb {
         &:after {
-          opacity: 1;
+          opacity: 0;
         }
-        &-label {
-          .js-split-str {
-            opacity: 1;
-            transform: scale(1);
-          }
-        }
+       
+        
       }
     }
   }

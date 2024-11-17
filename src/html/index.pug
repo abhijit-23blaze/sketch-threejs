@@ -9,15 +9,15 @@ block content
     .p-introduction
       .p-introduction__wrap
         .p-introduction__row.js-transition-intro
-          |Interactive sketches made with three.js.
+          | Emerging Techniques in Cyber Security for Building Resilient Network Infrastructure
         .p-introduction__row.js-transition-intro
-          |created by 
-          +textLink("https://www.tplh.net/", "yoichi kobayashi.", "_blank")
+          |by 
+          +textLink("https://www.iiits.ac.in", "IIITS", "_blank")
         .p-introduction__links
           a(href="https://github.com/ykob/sketch-threejs/", target="_blank").p-introduction__link.js-transition-intro
             +iconGitHub(24)
-          a(href="https://twitter.com/ykob0123", target="_blank").p-introduction__link.js-transition-intro
-            +iconTwitter(24)
+          //- a(href="https://twitter.com/ykob0123", target="_blank").p-introduction__link.js-transition-intro
+          //-   +iconTwitter(24)
           a(href="mailto:info@tplh.net").p-introduction__link.js-transition-intro
             +iconMail(24)
         .p-introduction__follow.js-transition-intro
@@ -29,22 +29,36 @@ block content
       - var count = 0;
       each item in data.pages
         if (item.title !== '' && item.title !== 'shadow')
+          - var rowClass = '';
+          - if (count < 9) {
+          -   rowClass = 'p-sketch-index__item--large';
+          - } else {
+          -   rowClass = 'p-sketch-index__item--small';
+          - }
+          
           .p-sketch-index__item(
-            class = 'js-smooth-item js-scroll-item',
+            class=`js-smooth-item js-scroll-item ${rowClass}`
           )
-            a(href = `/sketch-threejs${item.path}`).p-sketch-index__item-wrap
+            a(href=`/sketch-threejs${item.path}`).p-sketch-index__item-wrap
               .p-sketch-index__item-thumb(
-                style = `background-image: url(/sketch-threejs/img/common/ogp_${item.id}.jpg)`
+                style=`background-image: url(/sketch-threejs/img/common/ogp_${item.id}.jpg)`
               )
+
+              
                 .p-sketch-index__item-thumb-label
                   +splitStr('show this', 'js-split-str')
-              .p-sketch-index__item-title
-                +splitStr(item.title, 'js-split-str')
-              .p-sketch-index__item-date
-                |posted: #{item.posted} 
-                if (item.update)
-                  |/ update: #{item.update}
+              //- .p-sketch-index__item-title
+              //-   +splitStr(item.title, 'js-split-str')
+              //- .p-sketch-index__item-date
+              //-   |posted: #{item.posted} 
+              //-   if (item.update)
+              //-     |/ update: #{item.update}
           - count++;
+          if count >= 9
+            - break;
+
+    .p-introduction__row.js-transition-intro
+      | Emerging Techniques in Cyber Security for Building Resilient Network Infrastructure
 
   .p-dummy-scroll.js-dummy-scroll
 

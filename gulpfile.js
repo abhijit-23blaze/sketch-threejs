@@ -1,5 +1,6 @@
 const gulp = require('gulp');
 const requireDir = require('require-dir');
+var deploy      = require('gulp-gh-pages');
 
 const $ = require('./gulp/plugins');
 
@@ -21,3 +22,8 @@ gulp.task('build', gulp.series(
   'imagemin',
   'copyToBuild',
 ));
+
+gulp.task('deploy', function () {
+  return gulp.src("./dist/**/*")
+    .pipe(deploy())
+});

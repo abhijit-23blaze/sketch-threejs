@@ -1,6 +1,6 @@
 export default class ConsoleSignature {
   constructor() {
-    this.message = `created by yoichi kobayashi`;
+    this.message = `created by Abhijit Patil`;
     this.url = `https://www.tplh.net/`;
     this.show();
   }
